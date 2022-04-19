@@ -32,5 +32,7 @@ This is the lab resources for SUSTech EE346.
    source devel/setup.bash
    
    rosrun lane_following lane_following.py
+   
+   **Note: Each lane_following_part file is corresponding to each lab part.**
 
  ![image](https://github.com/zhaojieting/linefollowing/blob/main/data/demo.gif)
