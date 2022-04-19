@@ -23,11 +23,11 @@ class Follower:
                 image = self.bridge.imgmsg_to_cv2(msg,desired_encoding='bgr8')
                 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-                lower_yellow = numpy.array([ 10, 10, 10])
-                upper_yellow = numpy.array([255, 255, 250])
+                lower_yellow = numpy.array([ 26, 43, 46])
+                upper_yellow = numpy.array([34, 255, 255])
 
-                lower_white = numpy.array([0, 0, 80])
-                upper_white = numpy.array([180, 43, 220])
+                lower_white = numpy.array([0, 0, 221])
+                upper_white = numpy.array([0, 0, 255])
                 
                 mask1 = cv2.inRange(hsv, lower_yellow, upper_yellow)
                 mask2 = cv2.inRange(hsv, lower_white, upper_white)
@@ -52,7 +52,7 @@ class Follower:
 
                     cv2.circle(image, (cx1, cy1), 10, (0,255,255), -1)
                     cv2.circle(image, (cx2, cy2), 10, (255,255,255), -1)
-                    cv2.circle(image, (fpt_x, fpt_y), 10, (128,128,128), -1)
+                    cv2.circle(image, (fpt_x, cy1), 10, (34,144,255), -1)
 
                     err = w/2 - fpt_x
 
@@ -60,6 +60,9 @@ class Follower:
                     self.twist.angular.z = (err*90.0/160)/15
                     self.cmd_vel_pub.publish(self.twist)
                 cv2.imshow("window", image)
+               # cv2.imshow("mask1", mask1)
+               # cv2.imshow("mask2", mask2)
+               # print(cx1,cy1)
                 cv2.waitKey(1)
 
 rospy.init_node('lane_follower')
